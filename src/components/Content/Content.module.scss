@@ -1,0 +1,11 @@
+.content {
+	overflow: auto;
+	gap: clamp(40px, 8vw, 5vw);
+	align-items: center;
+	margin-top: clamp(40px, 5vw, 2vw);
+	overflow: hidden;
+
+	img {
+		max-width: 100%;
+	}
+}

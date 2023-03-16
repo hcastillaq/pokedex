@@ -1,0 +1,25 @@
+.tag {
+	background-color: white;
+	width: fit-content;
+	box-shadow: var(--box-shadow);
+	text-shadow: none !important;
+	padding: 5px;
+	border-radius: 5px;
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: .8rem;
+	color: rgba(0, 0, 0, .65);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&.rounded {
+		width: 30px;
+		height: 30px;
+		border-radius: 50px !important;
+
+		img {
+			width: 80%;
+		}
+	}
+}

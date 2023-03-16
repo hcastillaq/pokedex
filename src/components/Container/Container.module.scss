@@ -1,0 +1,10 @@
+.container {
+	margin: 0 auto;
+	margin-top: clamp(20px, 10vw, 12dvh);
+	max-width: 1000px;
+	min-width: 300px;
+	display: flex;
+	flex-direction: column;
+	padding: 0px 4vw 60px 4vw;
+	overflow: auto;
+}
