@@ -10,7 +10,6 @@ const Search = () => {
 	const dispatch = useAppDispatch();
 	const searchInput = useRef<HTMLInputElement>(null);
 	const loading = useAppSelector((state) => state.app.loading);
-	const notFound = useAppSelector((state) => state.app.notFound);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
