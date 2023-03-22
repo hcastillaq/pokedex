@@ -10,7 +10,7 @@ export interface InitialState {
 const initialState: InitialState = {
 	pokemon: undefined,
 	loading: true,
-	notFound: false,
+	notFound: true,
 };
 
 export const appSlice = createSlice({

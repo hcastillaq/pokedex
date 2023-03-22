@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { setLoading, setPokemon } from "../../redux/store";
+import { setLoading, setNotFound, setPokemon } from "../../redux/store";
 import { pokemonService } from "../../services/pokemon.service";
+import Dialog from "../Dialog/dialog";
 import search from "./../../assets/search.png";
 import styles from "./Search.module.scss";
 
@@ -9,6 +10,7 @@ const Search = () => {
 	const dispatch = useAppDispatch();
 	const searchInput = useRef<HTMLInputElement>(null);
 	const loading = useAppSelector((state) => state.app.loading);
+	const notFound = useAppSelector((state) => state.app.notFound);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -26,6 +28,7 @@ const Search = () => {
 			const res = await pokemonService.getByNameOrRandom(pokemon || undefined);
 			dispatch(setPokemon(res));
 		} catch (error) {
+			dispatch(setNotFound(true));
 			console.log(error);
 		}
 		setTimeout(() => dispatch(setLoading(false)), 500);
@@ -38,34 +41,40 @@ const Search = () => {
 	}, []);
 
 	return (
-		<div className={styles.search_container}>
-			<div className={styles.search}>
-				<form onSubmit={handleSubmit}>
-					<input
-						name="pokemon"
-						type="text"
-						placeholder="Name or number"
-						ref={searchInput}
-						disabled={loading}
-					/>
+		<>
+			<Dialog>
+				Sorry, the pokemon <strong>{searchInput.current?.value}</strong> not
+				exist.
+			</Dialog>
+			<div className={styles.search_container}>
+				<div className={styles.search}>
+					<form onSubmit={handleSubmit}>
+						<input
+							name="pokemon"
+							type="text"
+							placeholder="Name or number"
+							ref={searchInput}
+							disabled={loading}
+						/>
 
-					<button type="submit" disabled={loading}>
-						<img src={search} alt="search" />
-					</button>
-				</form>
+						<button type="submit" disabled={loading}>
+							<img src={search} alt="search" />
+						</button>
+					</form>
+				</div>
+
+				<button
+					type="button"
+					className={`${styles.random} ${loading ? styles.loading : ""}`}
+					disabled={loading}
+					onClick={() => {
+						getPokemon();
+					}}
+				>
+					{loading ? <img alt="loading" src="/pokeball.svg" /> : "⚄"}
+				</button>
 			</div>
-
-			<button
-				type="button"
-				className={`${styles.random} ${loading ? styles.loading : ""}`}
-				disabled={loading}
-				onClick={() => {
-					getPokemon();
-				}}
-			>
-				{loading ? <img alt="loading" src="/pokeball.svg" /> : "⚄"}
-			</button>
-		</div>
+		</>
 	);
 };
 

@@ -1,0 +1,30 @@
+.overlay {
+	--blur: blur(6px);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100dvh;
+	background: rgba(0, 0, 0, .3);
+	backdrop-filter: var(--blur);
+	-webkit-backdrop-filter: var(--blur);
+	display: flex;
+	justify-content: center;
+}
+
+.dialog {
+	width: fit-content;
+	max-width: 80%;
+	margin-top: clamp(60px, 20vh, 200px);
+	box-shadow: var(--box-shadow);
+	border: none;
+	color: black !important;
+	text-shadow: none !important;
+}
+
+.closeBtn {
+	border: 1px solid black;
+	background-color: white;
+	padding: 5px 10px;
+	cursor: pointer;
+}
