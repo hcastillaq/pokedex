@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setLoading, setNotFound, setPokemon } from "../../redux/store";
 import { pokemonService } from "../../services/pokemon.service";
-import Dialog from "../Dialog/dialog";
+import Dialog from "../Dialog/Dialog";
 import search from "./../../assets/search.png";
 import styles from "./Search.module.scss";
 
