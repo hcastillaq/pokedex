@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setLoading, setNotFound, setPokemon } from "../../redux/store";
 import { pokemonService } from "../../services/pokemon.service";
@@ -10,6 +10,7 @@ const Search = () => {
 	const dispatch = useAppDispatch();
 	const searchInput = useRef<HTMLInputElement>(null);
 	const loading = useAppSelector((state) => state.app.loading);
+	const [query, setQuery] = useState<string>("");
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -18,6 +19,7 @@ const Search = () => {
 			.toLocaleLowerCase()
 			.trim();
 		getPokemon(pokemon);
+		setQuery(pokemon);
 	};
 
 	const getPokemon = async (pokemon?: string) => {
@@ -44,8 +46,7 @@ const Search = () => {
 	return (
 		<>
 			<Dialog>
-				Sorry, the pokemon <strong>{searchInput.current?.value}</strong> not
-				exist.
+				Sorry, the pokemon <strong>{query}</strong> not exist.
 			</Dialog>
 			<div className={styles.search_container}>
 				<div className={styles.search}>
