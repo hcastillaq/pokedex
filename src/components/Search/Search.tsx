@@ -28,6 +28,7 @@ const Search = () => {
 			const res = await pokemonService.getByNameOrRandom(pokemon || undefined);
 			dispatch(setPokemon(res));
 		} catch (error) {
+			searchInput.current && (searchInput.current.value = "");
 			dispatch(setNotFound(true));
 			console.log(error);
 		}
